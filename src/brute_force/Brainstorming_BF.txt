@@ -1,0 +1,54 @@
+- Ivette Garcia -
+Sources:
+https://www.fda.gov/food/nutrition-facts-label/calories-nutrition-facts-label
+
+Meal: must be a combination of AT LEAST 3 food items
+Food Items are listed in the CSV file
+
+Brute Force Algorithm: Checks every possible combination no matter what. This is very lengthy and can take a long time.
+
+Because of this... there will only be 15 possible food items in the CSV file. ( I do not want my computer to crash )
+
+
+
+Ideal Meal: (best case)
+
+cost: minimize
+calories: target of 665 
+fat: target of 20 grams
+carbs: target of 65 grams
+protein: maximize
+number of food items: at least 3 food items
+
+Reasoning behind the ideal meal:
+Cost: the cheaper the better
+calories: "2,000 calories a day is used as a general guide for nutrition advice." We used a source mentioned above, along with our own personal knowledge. 2000/3 = 666.6666
+Fat: Our team decided on 20 grams of fat
+Carbs: Our team decided on 65 grams of carbs
+Protein: We have decided that the more protein the better
+Number of food items: We dont want the ideal meal to be boring
+
+
+
+My idea for this brute force algorithm:
+
+- Need to have a list of food items and their cost, calories, fat, carbs, and protein in the CSV file
+- Need to read in from the CSV file
+- Generate 2^15 combinations
+- Us a loop to count how many food items are included in each combination
+- ignore combinations with less than 3 food items
+- Add the food item's cost and nutritional information together for EACH combination
+- Compare the totals to the ideal Meal
+- Create 5 seperate lists containing each meals nutritional information and cost. Each meal will have an identifier that goes with it.
+- Sort each list based on its categories goal
+    cost: lowest gets 1st place
+    fat, carbs, calories: will use absolute value to see which one is closest to my desired amount. Smallest difference between ideal and current will get 1st
+    protein: highest gets 1st
+- Convert each meal combination's placement in the sorted list into points. 1st place = 1 point
+- Add the points from all categories together
+- Find the top 8 scores. (The meals with the lowest amount of points are the "best" meals.)
+
+
+Extra information we have decided: 
+- each category is worth the same
+- ties will be given the same score. Example: two meals tie for first place, both receive 1 point, and the next meal receives 3 points
