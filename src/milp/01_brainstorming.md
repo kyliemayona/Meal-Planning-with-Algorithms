@@ -7,19 +7,21 @@ Meal Requirements:
 
 - Each meal must contain at least 3 different food items.
 
-- Cost: Minimize.
+- Cost: Minimize
 
-- Calories: Target of 665.
+- Calories: Target of 665
 
-- Fat: Target of 20 grams.
+- Fat: Target of 20 grams
 
-- Carbohydrates: Target of 65 grams.
+- Carbohydrates: Target of 65 grams
 
-- Protein: Maximize.
+- Protein: Maximize
 
-- Each category should have equal importance.
+- Number of food items: At least 3
 
-- Return the top 8 meal combinations.
+- Each category has equal importance.
+
+
 
 
 My Idea for the MILP Algorithm:
