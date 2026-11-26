@@ -1,0 +1,62 @@
+Meal Planning with Genetic Algorithms
+
+Genetic Algorithm Brainstorming - Micah Burzese
+
+Sources: https://www.fda.gov/food/nutrition-facts-label/calories-nutrition-facts-label
+
+   Constraints: 
+      # A meal must be at least 3 food items - variety is beneficial
+        # 1. 665 calories is best case - based on recommended daily value and assumed 3 meals per day.
+        # 2. Protein - higher is better
+        # 3. Cost lower is better
+        # 4. Fat - 20g is optimal - based on recommended daily value and assumed 3 meals per day.
+        # 5. Carbs - 65 is optimal - based on recommended daily value and assumed 3 meals per day.
+
+   Note - Each category will be weighted as equally important.
+
+   Reasoning:
+      Our algorithms must share the same goals so results can be compared fairly. The goal is to find an
+      inexpensive meal that is close to our desired calorie, fat, and carbohydrate amounts while providing
+      as much protein as possible (and hopefully being tasty - although that is subjective).
+
+Food items are listed in meal_planning_15_foods.CSV
+
+Genetic Algorithm - A genetic algorithm starts with a population of random meal combinations. It uses
+selection, crossover, and mutation to create new combinations. Ideally, these new combinations will improve 
+over multiple generations. 
+
+The plan for the genetic algorithm:
+
+- Must read in the 15 foods, their cost, and nutritional information from the CSV file
+- Represent each possible meal as a chromosome containing 15 binary values.
+   0 means the food is not included
+   1 means the food is included
+- Generate an initial population of random chromosomes representing different meals.
+- Count the number of foods in each meal.
+- Ignore meals containing less than 3 food items.
+- Calculate the total cost, calories, fat, carbs, and protein for each meal.
+- Evaluate each meal using the same categories and goals as the brute force and MILP approach.
+   cost: lower is better
+   calories: closer to 665 is better
+   carbs: closer to 65 grams is better
+   protein: higher is better
+- Give each meal a fitness score that represents how closely it matches our ideal meal.
+- Select best meals to act as parents for the next generation.
+- Use crossover to combine parts of two parent chromosomes and create new meal combinations.
+- Use mutation to occassionally change a 0 to a 1 or vise versa.
+- Repeat the process over generations to produce better meals.
+- Keep track of the best meal combinations discovered.
+- Once the algorithm finishes, return the top 8 meal combinations and their nutritional information.
+
+Later decisions:
+- Initial popualtion size
+- Number of generations
+- Mutation rate
+- Selection method: tournament
+- Crossover method: single-point
+
+Expected challenges:
+- Determining an appropiate fitness function
+- Preventing repeat meals
+- Choosing population sizes and mutation rates that produce reasonable results.
+- Making sure randomness is appropiate
