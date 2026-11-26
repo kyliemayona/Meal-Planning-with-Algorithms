@@ -1,0 +1,68 @@
+Genetic Algorithm - Pseudocode
+
+START 
+
+1. Read the 15 food items from meal_planning_15_foods.CSV
+
+2. Define the ideal meal:
+    calories = 665
+    fat = 20g
+    carbs = 65g
+    protein = maximize
+    cost = minimize
+    minimum foods = 3
+
+3. Set genetic algorithm parameters:
+    popualtions size = 50
+    maximum generations = 200
+    mutation rate = 0.05
+
+4. Generate an initial popualtion:
+    For 50 times:
+        Generate a chromosome containing 15 random binary values
+        Add chromosome to popualtion
+
+5. For each generation 1 to 200:
+    For each chromosome in popualtion:
+        Count the selected food items
+        If fewer tha n3 foods are selected:
+            Mark meal invalid
+        Else:
+            Calculate total cost
+            Calculate total calories
+            Calculate total fat
+            Calculate total carbs
+            Calculate total protein
+            Calculate fitness using scoring method
+    Save best valid meal
+
+    Create a new popualtion:
+        Preserve the best chromosome
+
+        While new population contains fewer than 50 chromosomes:
+            Select two parents using tournament selection
+            Choose a random crossover point
+            Combine the parents to create two children
+
+                For each bit in child:
+                    with 5% probability:
+                        Flip bit
+                Add children to new population until population = 50
+
+    Replace old popualtion with new popualtion
+
+6. Evaluate the final population and update the saved best meals
+
+7. Find the 8 best unique valid meals discover through all generations
+
+8. Display each meal's:
+    selected food items
+    total cost
+    total calories
+    total fat
+    total carbs
+    total protein
+    fitness score
+
+END
+
