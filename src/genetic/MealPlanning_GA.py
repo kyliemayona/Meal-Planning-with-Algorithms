@@ -6,9 +6,11 @@ CSV_FILE = Path(__file__).resolve().parents[2] / "meal_planning_15_foods.csv" # 
 
 def load_foods():
    foods = []
+   # Open the CSV file and read each row into a dictionary
    with open(CSV_FILE, newline = "", encoding = "utf-8") as file:
       reader = csv.DictReader(file)
       for row in reader:
+         # Convert numeric values to floats 
          foods.append({
             "name": row["food"],
             "cost": float(row["cost_usd"]),
@@ -20,14 +22,15 @@ def load_foods():
    return foods
 
 def create_chromosome(food_count): # Generate one random meal chromosome
-   return [random.randint(0, 1) for _ in range(food_count)]
+   return [random.randint(0, 1) for _ in range(food_count)] 
 
-def evaluate_meal(foods):
+# Evaluate one meal based on the foods selected in its chromosome
+def evaluate_meal(chromosome, foods):
    selected = []
-   cost = calories = fat = protein = carbs = 0.0
+   cost = calories = fat = protein = carbs = 0.0 # Initialize totals
 
    for i in range(len(foods)):
-      if [i] == 1:
+      if chromosome[i] == 1:
          food = foods[i]
          selected.append(food["name"])
          cost += food["cost"]
@@ -36,9 +39,10 @@ def evaluate_meal(foods):
          protein += food["protein"]
          carbs += food["carbs"]
 
+# Return a dictionary with the meal's details, including whether it is valid (at least 3 foods selected)
    return {
       "foods": selected,
-      "valid": len(selected) > 3, 
+      "valid": len(selected) >= 3, 
       "cost": cost,
       "calories": calories,
       "fat": fat,
@@ -54,9 +58,11 @@ def main():
 
    for number, chromosome in enumerate(population[:3], start=1):
       meal = evaluate_meal(chromosome, foods)
+      # Display the chromosome, selected foods, and whether the meal is valid
       print(f"Meal {number}: {chromosome}")
       print(f"Selected: {', '.join(meal['foods'])}")
       print(f"Valid: {meal['valid']}")
+      # Display the nutritional information and cost of the meal
       print(f"Cost: ${meal['cost']:.2f}")
       print(f"Calories: {meal['calories']:.0f}")
       print(f"Fat: {meal['fat']:.1f}g")
