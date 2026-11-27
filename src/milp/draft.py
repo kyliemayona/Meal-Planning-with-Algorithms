@@ -1,9 +1,8 @@
-
-
 #import libraries
 import csv
 import pulp#creates the milp model, decision variables, constraints, and objective function
 from pathlib import Path#locates the csv file within your repository.
+
 #nutritional targets
 target_calories = 665
 target_fat = 20
@@ -16,13 +15,15 @@ target_carbs = 65
 #meal requirements
 minimum_foods = 3
 number_of_meals = 8
+
 #empty list to store food items
 foods = []
+
 #locate csv file
 csv_file = Path(__file__).resolve().parents[2] / "meal_planning_15_foods.csv"
 
 #read csv file
-with open(csv_file, "r") as file:
+with open(csv_file, "r", newline="", encoding="utf-8-sig") as file:
     reader = csv.DictReader(file)
 
     for row in reader:
@@ -34,11 +35,18 @@ with open(csv_file, "r") as file:
             "carbs": float(row["carbs_g"]),
             "protein": float(row["protein_g"])
         })
+
 print("Number of foods:", len(foods))
+
+#make sure there are enough food items to create a meal
+if len(foods) < minimum_foods:
+    raise ValueError("Not enough food items to create a meal.")
+
 #create the milp model.
 model = pulp.LpProblem("Meal_Optimization", pulp.LpMinimize)
+
 #create binary decision variables
-#0 means the food is not selected 1 means it ids
+#0 means the food is not selected 1 means it is
 x = []
 
 for i in range(len(foods)):
@@ -47,8 +55,10 @@ for i in range(len(foods)):
             f"food_{i}", 0, 1, cat=pulp.LpBinary
         )
     )
+
 #require at least three food items.
 model += pulp.lpSum(x) >= minimum_foods
+
 #create expressions for cost, calories, fat, carbohydrates, and protein.
 total_cost = pulp.lpSum(
     foods[i]["cost"] * x[i]
