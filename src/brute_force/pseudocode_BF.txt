@@ -1,0 +1,62 @@
+# PseudoCode for the Brute Force Approach to Meal planning
+
+#step 1: read food items from csv file
+food items = read CSV file
+
+# step 2: genereate every possible combination
+all_combinations = genrete 2^15 combinations
+
+# step 3: create lists for each category
+cost_list =[]
+calories_list = []
+fat_list = []
+carbs_list = []
+protein _list = []
+
+
+#step 4: check every combination
+
+(is it even a valid combo)
+for each combination in all_combinations:
+
+    count the umber of food items
+
+    (first checking if its even a valid combo)
+    if combination hass less than 3 items:
+        skip combination
+
+    else:
+        calculate total cost
+        calculate total calories
+        calculate total fat
+        calculate total carbs
+        calculate total protein
+
+        save meal information in each category list
+        give meal an id 
+
+# step 5: sort each category
+sort cost from lowest to highest (will use bubble sort more than likely)
+sort calories by closest to 665 (absolute difference)
+sort fat by closest to 20
+sort carbs by closest to 65
+sort protein from highest to lowest
+
+
+# step 6: give each meal points
+for each meal: 
+    get placement in each category 
+    convert placements into points (1st place = 1 point)
+    give ties the same placement
+    add all 5 category points together
+
+
+# find top 8 meals
+sort meals by total points (lowest = best)
+
+find the score of the 8th meal
+
+(want to keep ties)
+teturn all meals with a score <= 8th meal's score
+
+
