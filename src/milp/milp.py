@@ -43,6 +43,12 @@ print("Number of foods:", len(foods))
 if len(foods) < minimum_foods:
     raise ValueError("Not enough food items to create a meal.")
 
+#check that the cbc solver is available
+solver = pulp.COIN_CMD(msg=False)
+
+if not solver.available():
+    raise RuntimeError("CBC solver is not installed or available.")
+
 #start execution timer
 start_time = time.perf_counter()
 
@@ -90,6 +96,7 @@ total_protein = pulp.lpSum(
 )
 
 #create variables to store nutritional deviations
+#deviations cannot be negative
 calorie_dev = model.add_variable("calorie_dev", 0)
 fat_dev = model.add_variable("fat_dev", 0)
 carb_dev = model.add_variable("carb_dev", 0)
@@ -125,6 +132,22 @@ max_carb_dev = max(
     sum(food["carbs"] for food in foods) - target_carbs
 )
 
+#prevent division by zero when normalizing
+if max_cost == 0:
+    max_cost = 1
+
+if max_protein == 0:
+    max_protein = 1
+
+if max_calorie_dev == 0:
+    max_calorie_dev = 1
+
+if max_fat_dev == 0:
+    max_fat_dev = 1
+
+if max_carb_dev == 0:
+    max_carb_dev = 1
+
 #each category is worth 20 percent
 weight = 0.20
 
@@ -141,18 +164,19 @@ model += weight * (
 #empty list to store the best meal combinations
 best_meals = []
 
+#set to keep track of meal combinations and prevent duplicates
+previous_meals = set()
+
 #loop through the model to find the top 8 meals
 for meal_number in range(number_of_meals):
 
-    #solve the milp model
-    #solve the milp model
-#error: pulp cannot execute the cbc solver
-#need to install cbc or fix the solver path
-    model.solve(pulp.COIN_CMD(msg=False))
+    #solve the milp model using cbc
+    stats = model.solve(solver)
 
     #check if an optimal meal was found
-    if model.status != pulp.LpStatusOptimal:
+    if stats.status != pulp.LpSolveStatus.Optimal:
         print("No more optimal meals found.")
+        print("Solver status:", stats.status_str)
         break
 
     #empty lists to store selected and unselected food items
@@ -161,10 +185,23 @@ for meal_number in range(number_of_meals):
 
     #determine which food items were selected
     for i in range(len(foods)):
-        if x[i].varValue > 0.5:
+        if pulp.value(x[i]) > 0.5:
             selected_foods.append(i)
         else:
             unselected_foods.append(i)
+
+    #make sure the meal contains at least three food items
+    if len(selected_foods) < minimum_foods:
+        raise ValueError("Invalid meal: fewer than three food items.")
+
+    #check that the meal has not already been found
+    meal_combination = tuple(selected_foods)
+
+    if meal_combination in previous_meals:
+        raise ValueError("Duplicate meal combination found.")
+
+    #store the combination to keep track of previous meals
+    previous_meals.add(meal_combination)
 
     #store meal information
     best_meals.append({
@@ -188,24 +225,52 @@ for meal_number in range(number_of_meals):
 end_time = time.perf_counter()
 execution_time = end_time - start_time
 
+#sort meals from lowest score to highest score
+best_meals.sort(key=lambda meal: meal["score"])
+
 #display the top 8 meal combinations
+print("\nTop Meal Combinations")
+print("------------------------------")
+
 for i in range(len(best_meals)):
 
     meal = best_meals[i]
 
-    print("\nMeal", i + 1)
+    #identify the best meal
+    if i == 0:
+        print("\nMeal", i + 1, "- Best Meal")
+    else:
+        print("\nMeal", i + 1)
 
     #display selected food items
     for food in meal["foods"]:
         print(food)
 
     #display nutritional information and cost
+    print("Number of food items:", len(meal["foods"]))
     print("Cost: $", round(meal["cost"], 2))
     print("Calories:", round(meal["calories"], 2))
     print("Fat:", round(meal["fat"], 2), "grams")
     print("Carbohydrates:", round(meal["carbs"], 2), "grams")
     print("Protein:", round(meal["protein"], 2), "grams")
-    print("Score:", round(meal["score"], 6))
 
-#display execution time
-print("\nExecution time:", execution_time, "seconds")
+    #display differences from nutritional targets
+    print("Calorie deviation:", round(
+        abs(meal["calories"] - target_calories), 2
+    ))
+
+    print("Fat deviation:", round(
+        abs(meal["fat"] - target_fat), 2
+    ), "grams")
+
+    print("Carbohydrate deviation:", round(
+        abs(meal["carbs"] - target_carbs), 2
+    ), "grams")
+
+    #display overall meal score
+    print("Score:", round(meal["score"], 6))
+    print("------------------------------")
+
+#display final results
+print("\nNumber of meals found:", len(best_meals))
+print("Execution time:", round(execution_time, 6), "seconds")
