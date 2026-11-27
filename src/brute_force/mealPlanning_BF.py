@@ -1,4 +1,4 @@
-# name of csv file: meal_planning_15_foods.c
+# name of csv file: meal_planning_15_foods.csv
 
 import csv # will be using csv files
 from itertools import combinations # built in python module that provides a combination tool which will be useful
@@ -7,7 +7,7 @@ from itertools import combinations # built in python module that provides a comb
 food_items = []
 
 # opening csv file
-with open("meal_planning_15_foods.csv", "r") as file: # read mode
+with open("../../meal_planning_15_foods.csv", "r") as file: # read mode. forgot that the csv file is in main project folder(2 folders back)
 
     reader = csv.DictReader(file) # csv.DictReader(file) lets me access csv info using column names
 
@@ -17,7 +17,8 @@ with open("meal_planning_15_foods.csv", "r") as file: # read mode
 # STEP 2 
 all_combinations = [] # creating a list to store all the possible combinatinos 
 
-for number in range(1, len(food_items)): # going through every possible combination size. item1-15
+# going through every possible combination size. item1-15
+for number in range(1, len(food_items) + 1): # adding a 1 to food_items length is crucial because im starting the item count at 1 and the computer thinks of it as 0
 
     for combination in combinations(food_items, number):
         all_combinations.append(combination) # adding each combination to the list
@@ -52,7 +53,7 @@ for combination in all_combinations:
     for food in combination:
 
         # ... calculating total for each category
-        total_cost += float(food["cost"])
+        total_cost += float(food["cost_usd"]) # name in csv file is cost_usd
         total_calories += float(food["calories"])
         total_fat += float(food["fat_g"])
         total_carbs += float(food["carbs_g"])
