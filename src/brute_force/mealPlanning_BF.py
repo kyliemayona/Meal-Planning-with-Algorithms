@@ -2,7 +2,10 @@
 
 import csv # will be using csv files
 from itertools import combinations # built in python module that provides a combination tool which will be useful
+import time # need to calculate runtime
 
+
+start_time = time.time() # adding this here at the start
 # STEP 1
 food_items = []
 
@@ -149,29 +152,70 @@ ranked_meals = sorted(meal_scores.items(), key=lambda meal: meal[1])
 # [1] = total points
 eighth_score = ranked_meals[7][1] # using the sorted list. using [7] because python starts counting at 0
 
+# Stopping the timer and calculating how long the algorithm took
+end_time = time.time()
+execution_time = end_time - start_time
 
-with open(r"C:\Users\ivett\OneDrive\Documents\Algorithms\Meal-Planning-with-Algorithms\MainResults/brute_force_main_results.txt", "w") as file: # opening a file in write mode because im sending the results to it
+with open(r"C:\Users\ivett\OneDrive\Documents\Algorithms\Meal-Planning-with-Algorithms\MainResults\brute_force_main_results.txt", "w") as file: # opening a file in write mode because im sending the results to it
 # r tells python that backslashes are regular characters
     # title:)
     file.write(" ---------------------------- BRUTE FORCE RESULTS ---------------------------- \n\n")
 
-     # only displaying tp 8 meals
+    # displaying the total number of valid meals
+    file.write("Total unique valid meals found: " + str(len(meal_scores)) + "\n\n")
+
+    # title for the top meals
+    file.write("Top 8 Meals Found\n\n")
+
+    meal_number = 1 # starting meal number at 1
+
+    # displaying the top 8 meals, including ties
     for meal_id, score in ranked_meals:
 
-        # keeping meals with scores less than or equal to 8th place
-        if score <= eighth_score:
+        if score <= eighth_score: # if score is less then or equal to 8ths score, then it gets printed
 
-            # writing the total points
-            file.write("Total Points: " + str(score) + "\n")
+            file.write("Meal " + str(meal_number) + "\n\n") # displaying the meal numner
 
-            # writing the meal itss
-            file.write("Food Items:\n")
+            # getting the food names for this meal
+            food_names = []
 
-            for food in meal_items[meal_id]:
-                file.write("- " + food["food"] + "\n")
+            for food in meal_items[meal_id]: # finding all the food items that belong to the meal using meal_id to find the correct combination
+                food_names.append(food["food"]) # adding the food name to the list
 
-            # Add an empty line between meals
-            file.write("\n")
+            file.write("Selected Foods: " + ", ".join(food_names) + "\n\n") # joining all the food names together with commas to make it easier to read
+
+            # finding and displaying the cost
+            for meal in cost_list: # going through list until meal ID is found
+                if meal[0] == meal_id:
+                    file.write("Cost: $" + format(meal[1], ".2f") + "\n") # displaying with exactly 2 decimal places
+
+            # finding and displaying the calories
+            for meal in calories_list:
+                if meal[0] == meal_id:
+                    file.write("Calories: " + format(meal[1], ".0f") + " kcal\n") # no decimal places
+
+            # finding and displaying the fat
+            for meal in fat_list:
+                if meal[0] == meal_id:
+                    file.write("Fat: " + format(meal[1], ".1f") + " g\n")
+
+            # finding and displaying the protein
+            for meal in protein_list:
+                if meal[0] == meal_id:
+                    file.write("Protein: " + format(meal[1], ".1f") + " g\n")
+
+            # finding and displaying the carbs
+            for meal in carbs_list:
+                if meal[0] == meal_id:
+                    file.write("Carbs: " + format(meal[1], ".1f") + " g\n")
+
+            # displaying the total points from all 5 categories
+            file.write("Total Points: " + str(score) + "\n\n")
+
+            meal_number += 1 # next meal number
+
+    # displaying execution time
+    file.write("Execution Time: " + format(execution_time, ".6f") + " seconds\n")
 
 # Tell the user that the results were saved
 print("Results saved to brute_force_main_results.txt")

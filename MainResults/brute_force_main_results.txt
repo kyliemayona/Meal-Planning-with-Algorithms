@@ -1,66 +1,95 @@
  ---------------------------- BRUTE FORCE RESULTS ---------------------------- 
 
+Total unique valid meals found: 32647
+
+Top 8 Meals Found
+
+Meal 1
+
+Selected Foods: Black beans (cooked), Whole wheat bread, Peanut butter, Greek yogurt (plain nonfat), Canned tuna (in water)
+
+Cost: $3.60
+Calories: 664 kcal
+Fat: 19.5 g
+Protein: 62.0 g
+Carbs: 61.0 g
 Total Points: 29510
-Food Items:
-- Black beans (cooked)
-- Whole wheat bread
-- Peanut butter
-- Greek yogurt (plain nonfat)
-- Canned tuna (in water)
 
+Meal 2
+
+Selected Foods: Chicken breast (cooked), Eggs, Oatmeal (dry), Baked potato, Canned tuna (in water)
+
+Cost: $4.05
+Calories: 705 kcal
+Fat: 17.1 g
+Protein: 70.9 g
+Carbs: 64.8 g
 Total Points: 29671
-Food Items:
-- Chicken breast (cooked)
-- Eggs
-- Oatmeal (dry)
-- Baked potato
-- Canned tuna (in water)
 
+Meal 3
+
+Selected Foods: Chicken breast (cooked), Eggs, Oatmeal (dry), Whole wheat bread, Canned tuna (in water)
+
+Cost: $4.05
+Calories: 704 kcal
+Fat: 18.9 g
+Protein: 74.6 g
+Carbs: 55.8 g
 Total Points: 29885
-Food Items:
-- Chicken breast (cooked)
-- Eggs
-- Oatmeal (dry)
-- Whole wheat bread
-- Canned tuna (in water)
 
+Meal 4
+
+Selected Foods: Chicken breast (cooked), Whole wheat bread, Baked potato, Canned tuna (in water), Olive oil
+
+Cost: $3.90
+Calories: 690 kcal
+Fat: 20.1 g
+Protein: 61.3 g
+Carbs: 65.0 g
 Total Points: 30038
-Food Items:
-- Chicken breast (cooked)
-- Whole wheat bread
-- Baked potato
-- Canned tuna (in water)
-- Olive oil
 
+Meal 5
+
+Selected Foods: Whole wheat bread, Peanut butter, Banana, Greek yogurt (plain nonfat), Canned tuna (in water)
+
+Cost: $3.15
+Calories: 655 kcal
+Fat: 19.4 g
+Protein: 55.3 g
+Carbs: 68.0 g
 Total Points: 30351
-Food Items:
-- Whole wheat bread
-- Peanut butter
-- Banana
-- Greek yogurt (plain nonfat)
-- Canned tuna (in water)
 
+Meal 6
+
+Selected Foods: White rice (cooked), Eggs, Black beans (cooked), Cheddar cheese, Canned tuna (in water)
+
+Cost: $3.25
+Calories: 673 kcal
+Fat: 20.9 g
+Protein: 53.6 g
+Carbs: 65.2 g
 Total Points: 30374
-Food Items:
-- White rice (cooked)
-- Eggs
-- Black beans (cooked)
-- Cheddar cheese
-- Canned tuna (in water)
 
+Meal 7
+
+Selected Foods: Chicken breast (cooked), Black beans (cooked), Peanut butter, Baked potato, Canned tuna (in water)
+
+Cost: $4.10
+Calories: 715 kcal
+Fat: 21.1 g
+Protein: 68.3 g
+Carbs: 64.0 g
 Total Points: 30671
-Food Items:
-- Chicken breast (cooked)
-- Black beans (cooked)
-- Peanut butter
-- Baked potato
-- Canned tuna (in water)
 
+Meal 8
+
+Selected Foods: Chicken breast (cooked), Oatmeal (dry), Baked potato, Cheddar cheese, Canned tuna (in water)
+
+Cost: $3.90
+Calories: 676 kcal
+Fat: 17.1 g
+Protein: 65.3 g
+Carbs: 64.4 g
 Total Points: 30726
-Food Items:
-- Chicken breast (cooked)
-- Oatmeal (dry)
-- Baked potato
-- Cheddar cheese
-- Canned tuna (in water)
 
+Execution Time: 0.269077 seconds
