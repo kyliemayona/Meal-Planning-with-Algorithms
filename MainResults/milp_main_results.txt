@@ -1,0 +1,151 @@
+Number of foods: 15
+
+Top Meal Combinations
+------------------------------
+
+Meal 1 - Best Meal
+Black beans (cooked)
+Whole wheat bread
+Peanut butter
+Greek yogurt (plain nonfat)
+Canned tuna (in water)
+Number of food items: 5
+Cost: $ 3.6
+Calories: 664.0
+Fat: 19.5 grams
+Carbohydrates: 61.0 grams
+Protein: 62.0 grams
+Calorie deviation: 1.0
+Fat deviation: 0.5 grams
+Carbohydrate deviation: 4.0 grams
+Score: 0.192683
+------------------------------
+
+Meal 2
+Whole wheat bread
+Peanut butter
+Banana
+Greek yogurt (plain nonfat)
+Canned tuna (in water)
+Number of food items: 5
+Cost: $ 3.15
+Calories: 655.0
+Fat: 19.4 grams
+Carbohydrates: 68.0 grams
+Protein: 55.3 grams
+Calorie deviation: 10.0
+Fat deviation: 0.6 grams
+Carbohydrate deviation: 3.0 grams
+Score: 0.193379
+------------------------------
+
+Meal 3
+Oatmeal (dry)
+Peanut butter
+Banana
+Greek yogurt (plain nonfat)
+Canned tuna (in water)
+Number of food items: 5
+Cost: $ 3.0
+Calories: 645.0
+Fat: 20.4 grams
+Carbohydrates: 67.0 grams
+Protein: 52.3 grams
+Calorie deviation: 20.0
+Fat deviation: 0.4 grams
+Carbohydrate deviation: 2.0 grams
+Score: 0.193854
+------------------------------
+
+Meal 4
+White rice (cooked)
+Eggs
+Black beans (cooked)
+Cheddar cheese
+Canned tuna (in water)
+Number of food items: 5
+Cost: $ 3.25
+Calories: 673.0
+Fat: 20.9 grams
+Carbohydrates: 65.2 grams
+Protein: 53.6 grams
+Calorie deviation: 8.0
+Fat deviation: 0.9 grams
+Carbohydrate deviation: 0.2 grams
+Score: 0.19445
+------------------------------
+
+Meal 5
+Chicken breast (cooked)
+Whole wheat bread
+Baked potato
+Canned tuna (in water)
+Olive oil
+Number of food items: 5
+Cost: $ 3.9
+Calories: 690.0
+Fat: 20.1 grams
+Carbohydrates: 65.0 grams
+Protein: 61.3 grams
+Calorie deviation: 25.0
+Fat deviation: 0.1 grams
+Carbohydrate deviation: 0.0 grams
+Score: 0.195677
+------------------------------
+
+Meal 6
+Oatmeal (dry)
+Black beans (cooked)
+Peanut butter
+Greek yogurt (plain nonfat)
+Canned tuna (in water)
+Number of food items: 5
+Cost: $ 3.45
+Calories: 654.0
+Fat: 20.5 grams
+Carbohydrates: 60.0 grams
+Protein: 59.0 grams
+Calorie deviation: 11.0
+Fat deviation: 0.5 grams
+Carbohydrate deviation: 5.0 grams
+Score: 0.196678
+------------------------------
+
+Meal 7
+Chicken breast (cooked)
+Eggs
+Oatmeal (dry)
+Baked potato
+Canned tuna (in water)
+Number of food items: 5
+Cost: $ 4.05
+Calories: 705.0
+Fat: 17.1 grams
+Carbohydrates: 64.8 grams
+Protein: 70.9 grams
+Calorie deviation: 40.0
+Fat deviation: 2.9 grams
+Carbohydrate deviation: 0.2 grams
+Score: 0.198244
+------------------------------
+
+Meal 8
+Chicken breast (cooked)
+Black beans (cooked)
+Peanut butter
+Baked potato
+Canned tuna (in water)
+Number of food items: 5
+Cost: $ 4.1
+Calories: 715.0
+Fat: 21.1 grams
+Carbohydrates: 64.0 grams
+Protein: 68.3 grams
+Calorie deviation: 50.0
+Fat deviation: 1.1 grams
+Carbohydrate deviation: 1.0 grams
+Score: 0.198669
+------------------------------
+
+Number of meals found: 8
+Execution time: 1.96154 seconds
