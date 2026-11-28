@@ -1,0 +1,66 @@
+ ---------------------------- BRUTE FORCE RESULTS ---------------------------- 
+
+Total Points: 29510
+Food Items:
+- Black beans (cooked)
+- Whole wheat bread
+- Peanut butter
+- Greek yogurt (plain nonfat)
+- Canned tuna (in water)
+
+Total Points: 29671
+Food Items:
+- Chicken breast (cooked)
+- Eggs
+- Oatmeal (dry)
+- Baked potato
+- Canned tuna (in water)
+
+Total Points: 29885
+Food Items:
+- Chicken breast (cooked)
+- Eggs
+- Oatmeal (dry)
+- Whole wheat bread
+- Canned tuna (in water)
+
+Total Points: 30038
+Food Items:
+- Chicken breast (cooked)
+- Whole wheat bread
+- Baked potato
+- Canned tuna (in water)
+- Olive oil
+
+Total Points: 30351
+Food Items:
+- Whole wheat bread
+- Peanut butter
+- Banana
+- Greek yogurt (plain nonfat)
+- Canned tuna (in water)
+
+Total Points: 30374
+Food Items:
+- White rice (cooked)
+- Eggs
+- Black beans (cooked)
+- Cheddar cheese
+- Canned tuna (in water)
+
+Total Points: 30671
+Food Items:
+- Chicken breast (cooked)
+- Black beans (cooked)
+- Peanut butter
+- Baked potato
+- Canned tuna (in water)
+
+Total Points: 30726
+Food Items:
+- Chicken breast (cooked)
+- Oatmeal (dry)
+- Baked potato
+- Cheddar cheese
+- Canned tuna (in water)
+

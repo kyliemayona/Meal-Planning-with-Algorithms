@@ -36,7 +36,7 @@ for each combination in all_combinations:
         give meal an id 
 
 # step 5: sort each category
-sort cost from lowest to highest (will use bubble sort more than likely)
+sort cost from lowest to highest (will use bubble sort more than likely. actually going to use built in sort function)
 sort calories by closest to 665 (absolute difference)
 sort fat by closest to 20
 sort carbs by closest to 65
