@@ -53,7 +53,7 @@ def evaluate_meal(chromosome, foods):
 def calculate_fitness(meal, foods):
    # Meal must be valid (at least 3 foods selected) 
    if not meal["valid"]:
-      return float("-inf")
+      return float("inf")
 
    # Calculate the maximum possible cost and protein based on the available foods
    max_cost = sum(food["cost"] for food in foods)
@@ -74,7 +74,7 @@ def calculate_fitness(meal, foods):
    weight = 0.20 # Each category receives equal weight in the fitness calculation
 
    score = weight * (cost_score + calorie_score + fat_score + carb_score + protein_score)
-   return score
+   return -score
 
 def tournament_selection(population, foods): # Select parent chromosome using tournament selection
    competitors = random.sample(population, 3) # Randomly select 3 competitors from the population
@@ -96,69 +96,97 @@ def crossover(parent1, parent2): # Perform single-point crossover between two pa
    child2 = parent2[:point] + parent1[point:] # Create second child by combining segments from both parents
    return child1, child2 # Return the two new child chromosomes
 
+def mutate(chromosome, mutation_rate=0.05): # Mutate a chromosome based on the mutation rate
+   mutated = chromosome.copy() # Create a copy of the chromosome to mutate
+   for i in range(len(mutated)):
+      if random.random() < mutation_rate: # Randomly decide whether to mutate each gene
+         mutated[i] = 1 - mutated[i] # Flip the gene (0 becomes 1 or 1 becomes 0)
+   return mutated
+ 
 def main():
    foods = load_foods()
    population = [create_chromosome(len(foods)) for _ in range(50)] # Create initial population of 50 random meal plans
 
-   print(f"Loaded {len(foods)} foods and generated {len(population)} meals.\n")
+   # Store every unique valid meal found
+   best_meals = {}
 
-   for number, chromosome in enumerate(population[:3], start=1):
-      meal = evaluate_meal(chromosome, foods)
-      fitness = calculate_fitness(meal, foods)
+   # Repeat genetic algorithm for 200 generations
+   for generation in range(201):
+      # Find the best chromosome in the current population
+      generation_best = None
+      generation_fitness = float("-inf")
 
-      # Display the chromosome, selected foods, and whether the meal is valid
-      print(f"Meal {number}: {chromosome}")
-      print(f"Selected: {', '.join(meal['foods'])}")
-      print(f"Valid: {meal['valid']}")
+      # Compare the fitness of the remaining chromosomes in the population
+      for chromosome in population[1:]:
+         meal = evaluate_meal(chromosome, foods)
+         if not meal["valid"]:
+            continue  # Skip invalid meals
 
-      # Display the nutritional information and cost of the meal
+         fitness = calculate_fitness(meal, foods)
+         chromosome_key = tuple(chromosome)  # Use the chromosome as a key for uniqueness
+         if chromosome_key not in best_meals:
+            best_meals[chromosome_key] = fitness
+
+         # Save the best chromosome of the current generation
+         if fitness > generation_fitness:
+            generation_best = chromosome
+            generation_fitness = fitness
+
+      if generation_best is None:
+         print("No valid meals found.")
+         break
+      
+      # Show progress every 20 generations
+      if generation % 20 == 0:
+         print(f"Generation {generation}: Best Fitness = {generation_fitness:.4f}")
+
+      # Stop after 200 generations
+      if generation == 200:
+         break
+
+      # Start the next population with the best chromosome
+      new_population = [generation_best.copy()]
+
+      # Generate children until 50 meals in population
+      while len(new_population) < 50:
+         parent1 = tournament_selection(population, foods)
+         parent2 = tournament_selection(population, foods)
+
+         child1, child2 = crossover(parent1, parent2)
+
+         child1 = mutate(child1)
+         child2 = mutate(child2)
+
+         new_population.append(child1)
+         if len(new_population) < 50:  # Ensure we don't exceed the population size
+            new_population.append(child2)
+
+      population = new_population # Replace old population with new population
+
+   sorted_meals = sorted(
+      best_meals.items(),
+      key=lambda item: item[1],
+      reverse=True
+   )
+
+   # Print the top 8 meals found
+   top_8_meals = sorted_meals[:8]
+
+   print(f"\nTotal unique valid meals found: {len(best_meals)}")
+   print("\nTop 8 Meals Found\n")
+
+   # Print the details of the top 8 meals
+   for number, (chromosome, fitness) in enumerate(top_8_meals, start=1):
+      meal = evaluate_meal(list(chromosome), foods)
+      print(f"Meal {number}")
+      print(f"Chromosome: list{chromosome}")
+      print(f"Selected Foods: {', '.join(meal['foods'])}")
       print(f"Cost: ${meal['cost']:.2f}")
-      print(f"Calories: {meal['calories']:.0f}")
-      print(f"Fat: {meal['fat']:.1f}g")
-      print(f"Protein: {meal['protein']:.1f}g")
-      print(f"Carbs: {meal['carbs']:.1f}g\n")
-      print(f"Fitness Score: {fitness:.3f}\n")
-   
-   print("Tournament Selection\n")
-
-   # Select two parents using tournament selection
-   parent1 = tournament_selection(population, foods)
-   parent2 = tournament_selection(population, foods)
-
-   meal1 = evaluate_meal(parent1, foods)
-   meal2 = evaluate_meal(parent2, foods)
-
-   fitness1 = calculate_fitness(meal1, foods)
-   fitness2 = calculate_fitness(meal2, foods)
-
-   # Display results of the tournament selection
-   print(f"Parent 1: {parent1}")
-   print(f"Selected Foods: {', '.join(meal1['foods'])}")
-   print(f"Fitness Score: {fitness1:.3f}\n")
-
-   print(f"Parent 2: {parent2}")
-   print(f"Selected Foods: {', '.join(meal2['foods'])}")
-   print(f"Fitness Score: {fitness2:.3f}\n")
-
-
-   print("\nCrossover\n") # Peform crossover using the two selected parents
-
-   child1, child2 = crossover(parent1, parent2)
-   child_meal1 = evaluate_meal(child1, foods)
-   child_meal2 = evaluate_meal(child2, foods)
-
-   child_fitness1 = calculate_fitness(child_meal1, foods)
-   child_fitness2 = calculate_fitness(child_meal2, foods)
-
-   print(f"Child 1: {child1}")
-   print(f"Selected Foods: {', '.join(child_meal1['foods'])}")
-   print(f"Valid: {child_meal1['valid']}")
-   print(f"Fitness Score: {child_fitness1:.4f}\n")
-
-   print(f"Child 2: {child2}")
-   print(f"Selected Foods: {', '.join(child_meal2['foods'])}")
-   print(f"Valid: {child_meal2['valid']}")
-   print(f"Fitness Score: {child_fitness2:.4f}\n")
+      print(f"Calories: {meal['calories']:.0f} kcal")
+      print(f"Fat: {meal['fat']:.1f} g")
+      print(f"Protein: {meal['protein']:.1f} g")
+      print(f"Carbs: {meal['carbs']:.1f} g")
+      print(f"Fitness Score: {fitness:.4f}")
 
 if __name__ == "__main__":
    main()
