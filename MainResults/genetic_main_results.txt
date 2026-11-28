@@ -1,0 +1,105 @@
+
+
+--- Genetic Algorithm Meal Planning Results ---
+
+Generation 0: Best Fitness = -0.2182
+Best Ever Fitness = -0.2182
+Generation 20: Best Fitness = -0.1993
+Best Ever Fitness = -0.1993
+Generation 40: Best Fitness = -0.1989
+Best Ever Fitness = -0.1989
+Generation 60: Best Fitness = -0.1989
+Best Ever Fitness = -0.1989
+Generation 80: Best Fitness = -0.1989
+Best Ever Fitness = -0.1989
+Generation 100: Best Fitness = -0.1989
+Best Ever Fitness = -0.1989
+Generation 120: Best Fitness = -0.1944
+Best Ever Fitness = -0.1944
+Generation 140: Best Fitness = -0.1944
+Best Ever Fitness = -0.1944
+Generation 160: Best Fitness = -0.1944
+Best Ever Fitness = -0.1944
+Generation 180: Best Fitness = -0.1944
+Best Ever Fitness = -0.1944
+Generation 200: Best Fitness = -0.1944
+Best Ever Fitness = -0.1944
+
+Total unique valid meals found: 1397
+
+Top 8 Meals Found
+
+Meal 1
+Chromosome: [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0]
+Selected Foods: White rice (cooked), Eggs, Black beans (cooked), Cheddar cheese, Canned tuna (in water)
+Cost: $3.25
+Calories: 673 kcal
+Fat: 20.9 g
+Protein: 53.6 g
+Carbs: 65.2 g
+Fitness Score: -0.1944
+Meal 2
+Chromosome: [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0]
+Selected Foods: Eggs, Banana, Baked potato, Cheddar cheese, Canned tuna (in water)
+Cost: $2.85
+Calories: 625 kcal
+Fat: 20.6 g
+Protein: 47.2 g
+Carbs: 65.2 g
+Fitness Score: -0.1989
+Meal 3
+Chromosome: [0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0]
+Selected Foods: Eggs, Whole wheat bread, Baked potato, Cheddar cheese, Canned tuna (in water)
+Cost: $3.15
+Calories: 680 kcal
+Fat: 22.2 g
+Protein: 53.9 g
+Carbs: 66.2 g
+Fitness Score: -0.1993
+Meal 4
+Chromosome: [0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0]
+Selected Foods: Chicken breast (cooked), Oatmeal (dry), Baked potato, Cheddar cheese, Canned tuna (in water)
+Cost: $3.90
+Calories: 676 kcal
+Fat: 17.1 g
+Protein: 65.3 g
+Carbs: 64.4 g
+Fitness Score: -0.1993
+Meal 5
+Chromosome: [0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0]
+Selected Foods: Oatmeal (dry), Banana, Ground beef (80% lean), Greek yogurt (plain nonfat), Canned tuna (in water)
+Cost: $4.25
+Calories: 665 kcal
+Fat: 19.4 g
+Protein: 67.3 g
+Carbs: 60.0 g
+Fitness Score: -0.1995
+Meal 6
+Chromosome: [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]
+Selected Foods: Eggs, Black beans (cooked), Baked potato, Greek yogurt (plain nonfat), Cheddar cheese, Canned tuna (in water)
+Cost: $4.30
+Calories: 734 kcal
+Fat: 20.7 g
+Protein: 70.9 g
+Carbs: 64.2 g
+Fitness Score: -0.1999
+Meal 7
+Chromosome: [0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0]
+Selected Foods: Chicken breast (cooked), Banana, Ground beef (80% lean), Baked potato, Canned tuna (in water)
+Cost: $4.90
+Calories: 726 kcal
+Fat: 20.0 g
+Protein: 76.6 g
+Carbs: 64.0 g
+Fitness Score: -0.2003
+Meal 8
+Chromosome: [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0]
+Selected Foods: Eggs, Oatmeal (dry), Baked potato, Cheddar cheese, Canned tuna (in water)
+Cost: $3.00
+Calories: 670 kcal
+Fat: 23.2 g
+Protein: 50.9 g
+Carbs: 65.2 g
+Fitness Score: -0.2013
+
+Execution Time: 0.229912 seconds

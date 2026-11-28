@@ -1,6 +1,8 @@
+import time
 import csv
 from pathlib import Path
 import random
+from contextlib import redirect_stdout
 
 CSV_FILE = Path(__file__).resolve().parents[2] / "meal_planning_15_foods.csv" # Locate CSV file in project directory
 
@@ -53,7 +55,7 @@ def evaluate_meal(chromosome, foods):
 def calculate_fitness(meal, foods):
    # Meal must be valid (at least 3 foods selected) 
    if not meal["valid"]:
-      return float("inf")
+      return float("-inf")
 
    # Calculate the maximum possible cost and protein based on the available foods
    max_cost = sum(food["cost"] for food in foods)
@@ -104,11 +106,14 @@ def mutate(chromosome, mutation_rate=0.05): # Mutate a chromosome based on the m
    return mutated
  
 def main():
+   start_time = time.time() # Start the timer for performance measurement
    foods = load_foods()
    population = [create_chromosome(len(foods)) for _ in range(50)] # Create initial population of 50 random meal plans
 
    # Store every unique valid meal found
    best_meals = {}
+   best_ever = None
+   best_ever_fitness = float("-inf")
 
    # Repeat genetic algorithm for 200 generations
    for generation in range(201):
@@ -117,7 +122,7 @@ def main():
       generation_fitness = float("-inf")
 
       # Compare the fitness of the remaining chromosomes in the population
-      for chromosome in population[1:]:
+      for chromosome in population:
          meal = evaluate_meal(chromosome, foods)
          if not meal["valid"]:
             continue  # Skip invalid meals
@@ -135,17 +140,23 @@ def main():
       if generation_best is None:
          print("No valid meals found.")
          break
+
+      # Update the best ever chromosome if the current generation's best is better
+      if generation_fitness > best_ever_fitness:
+         best_ever = generation_best.copy()
+         best_ever_fitness = generation_fitness
       
       # Show progress every 20 generations
       if generation % 20 == 0:
          print(f"Generation {generation}: Best Fitness = {generation_fitness:.4f}")
+         print(f"Best Ever Fitness = {best_ever_fitness:.4f}")
 
       # Stop after 200 generations
       if generation == 200:
          break
 
       # Start the next population with the best chromosome
-      new_population = [generation_best.copy()]
+      new_population = [best_ever.copy()]
 
       # Generate children until 50 meals in population
       while len(new_population) < 50:
@@ -179,7 +190,7 @@ def main():
    for number, (chromosome, fitness) in enumerate(top_8_meals, start=1):
       meal = evaluate_meal(list(chromosome), foods)
       print(f"Meal {number}")
-      print(f"Chromosome: list{chromosome}")
+      print(f"Chromosome: {list(chromosome)}")
       print(f"Selected Foods: {', '.join(meal['foods'])}")
       print(f"Cost: ${meal['cost']:.2f}")
       print(f"Calories: {meal['calories']:.0f} kcal")
@@ -188,5 +199,15 @@ def main():
       print(f"Carbs: {meal['carbs']:.1f} g")
       print(f"Fitness Score: {fitness:.4f}")
 
+   end_time = time.time() # Stop the timer
+   print(f"\nExecution Time: {end_time - start_time:.6f} seconds")
+
 if __name__ == "__main__":
-   main()
+   results_folder = Path(__file__).resolve().parents[2] / "MainResults"
+   results_file = results_folder / "genetic_main_results.txt"
+   with open(results_file, "a", encoding="utf-8") as file:
+      with redirect_stdout(file):
+         print(f"\n\n--- Genetic Algorithm Meal Planning Results ---\n")
+         main()
+   print("Results saved to MainResults/genetic_main_results.txt")
+   
